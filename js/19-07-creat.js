@@ -12,6 +12,9 @@ function renderTodoList(todoList, ulElementId) {
   const ulElement = document.getElementById(ulElementId);
   if (!ulElement) return;
 
+  // find ul element
+  // loop through todoList
+  // each todo -> create li element -> append to ul
   for (const todo of todoList) {
     const liElement = createTodoElement(todo);
     ulElement.appendChild(liElement);
