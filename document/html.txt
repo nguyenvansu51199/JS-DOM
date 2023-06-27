@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang='en-US'>
+    <head>
+          <meta charset='uft-8a'>
+          <title>Nội dung tiêu đề</title>
+    <body>
+
+<main></main> 			: thẻ chứa bố cục của trang. giống thẻ div. nhưng có ngữ nghĩa
+				nhưng không được chứa các thẻ <article>, <aside>, <footer>, <header> hoặc <nav>.
+
+<blockquotes></blockquotes>		:thẻ mang ngữ nghĩa trích dẫn
+
+Giờ trong ngày luôn đi kèm với am pm. vì vậy không thể tách rời chúng khi xuống hàng nên sử dụng entiti vào. ví dụ 8:00&nbsp;am
+
+THẺ a
+chỉ có thẻ a được phép bao bọc thẻ block
+<a href="/">phần click</a>	tải lại trang
+<a href="#!">phần click</a>	vị trí hiện tại
+<a href="#">phần click</a>	đầu trang
+<a href="liên kết" target='_blank' rel='noopener'>Đoạn văn bản có thể nhấn</a>	Liên kết được mở trong tab mới. Đảm bảo bảo mật
+<a href="https://htmlcss.fullstack.edu.vn/assets/f8_icon.png" download="f8-logo-download">Tải Logo F8</a>
+	Tải hình ảnh xuống .Thuộc tính dowload.   download="f8-logo-download" tên đặt khi tải xuống
+
+
+FORM
+Xác định một điều khiển tương tác trong một biểu mẫu web . TRA CỨU
+<form action="" autocomplete=""><input type="" name="" placeholder="" id =""></form>
+thẻ form thẻ bao bọc thẻ input
+	thuộc tính 	autocomplete="on"			Gợi ý những lần đã đăng nhập vào. Giá trị on hoặc off. Thuộc tính sử dụng thẻ form hoặc thẻ input
+	thuộc tính 	type="text"				Nhập văn bản bất kì ký tự nào
+		type="email"			Nhập văn bản, Trình duyệt sẽ cố gắng chỉ cho phép các địa chỉ email hợp lệ.Trên thiết bị di động, bàn phím email sẽ hiển thị.
+		type="number"			Nhập văn bản Số
+		type="checkbox"			Được chọn hoặc không được chọn.
+		type="radio"			Được chọn hoặc không được chọn..Cần được sử dụng kết hợp với các nút radio khác để chúng loại trừ lẫn nhau.
+						Kết hợp với thuộc tính name để loại trừ. Đặt giá trị name giống nhau của thẻ input muốn radio 
+
+						Liên kết các nút radio thông qua một name giá trị tương tự
+		type="submit"			Nút gửi được kích hoạt khi nhấp hoặc khi nhấn Enter.
+		...
+
+		name="first_name"			mã định danh. (Đặt tên giống như class id). 
+		placeholder="e.g. alex@smith.com"		gợi ý về định dạng dự kiến ​​cho đầu vào. Ví dụ gợi ý về gmail
+		required				Trình duyệt sẽ hiển thị cảnh báo nếu cố gắng gửi biểu mẫu bằng cách nhập văn bản trống.
+		disabled				Vô hiệu hóa đầu vào. Nhưng vẫn hiển thị khung nhìn
+
+NHÃN
+<label for="first_name"></label>			Đặt nhãn. Liên kết với id
+	thuộc tính for=""			 Lấy giá trị của for giống với id đặt cho input <input id="">(Khi input không phải là con của label) hoặc thẻ có id="".
+	kết hợp với input			<label><input type="checkbox" name="terms">I agree to the terms</label>
+					<label for="first_name">First name</label><br><input type="text" name="first_name" id="first_name">
+					Tối ưu, nâng cao trải nghiệm người dùng khi click vào label
+
+CHECKBOX VÀ RADIO
+Checkbox: sử dụng thuộc tính for của label và id của input
+Radio: chỉ checkbox 1 giá trị trong các giá trị. đặt giá trị của thuộc tính name giống nhau
+
+SUBMIT VÀ BUTTON
+thẻ submit được sử dụng khi kết hợp với thuộc tính action của thẻ form. 
+Khi submit thì tất cả dữ liệu của thẻ form sẽ được mang đi đến đường dẫn action="";
+Dữ liệu truyền đi thì thuộc tính name trong thẻ input không được để trống
+Thay thế thẻ input có type="submit" bằng thẻ button vì 2 thẻ như nhau.	<button type="submit">Login</button>
+<form method="GET"> Giá trị mặc định. Truyền dữ liệu qua url. dữ liệu sẽ hiển thị trên URL
+<form method="POST">Khi submit form,để dữ liệu trong form không hiển thị trên URL.
+<input type="button" value="Đăng nhập" /> thẻ thay vì đang nhập thì làm nhiệm vụ khác
+<input type="image" src="" alt="" />	ảnh nhưng mang tính submit
+
+FORM VALIDATION(XEM THÊM)
+Regex check email: [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$
+Regex khớp với +84, 84, 0: ^(0|+?84)(3|5|7|8|9)[0-9]{8}$
+Cách tìm kiếm Google đơn giản hơn: “email regex”, “phone regex vietnam”, v.v
+
+THẺ TEXTAREA 
+<textarea type="text" name="content" id="content"></textarea>	giống như thẻ input nhưng khung chứa không gian nội dung to hơn.
+nếu muốn hiển thị nhiều hàng thì dùng thêm thuộc tính rows="5"  5 hàng
+hủy resize bằng cách CSS.	resize: none;  width, height
+
+THẺ SELECT
+<select type="text" name="content" id="content"></select>		thẻ danh sách lựa chọn(thành phố, địa chỉ,...)
+<option value=""></option>	mục lựa chọn
+thuộc tính value giá trị để submit
+
+<label for=" address">Địa chỉ</label>
+<select type="address" name="address" id="address">		
+	<option value="" selected>--Chọn--</option>		có thuộc tính selected thì option hiển thị trên cùng. mặc định là option đầu tiên
+	<option value="HN">Hà Nội</option>		
+	<option value="HCM">Hồ Chí MInh</option>
+</select>
+
+
+Thẻ <pre> (preformatted) được sử dụng để giữ nguyên khoảng cách văn bản, ngắt dòng, tab và các ký tự định dạng khác mà trình duyệt web bỏ qua.
+Văn bản trong thẻ <pre> được hiển thị bằng phông chữ có độ rộng cố định, nhưng nó có thể được thay đổi bằng cách sử dụng CSS.
+Dấu xuống hàng đầu tiên và cuối cùng trong thẻ <pre> sẽ không được hiển thị ra trình duyệt.
+Thẻ <pre> thường được kết hợp với thẻ <code> để hiển thị khối code trên nội dung trang web.
+
+thẻ <button></button> là thẻ nút bấm. có sẵn, padding, border, background-color ở trong thẻ
+
+<img src="liên kết tới hình ảnh alt="" />
+
+Các cách để dùng css vào html
+	#External css: dùng link của css vào thẻ head
+			ví dụ:	<link rel="stylesheet" href="/assets/css/reset.css">
+			Emmet: link:css
+	#Internal css: Sử dụng thẻ <style> đặt trong nội dung file HTML. vào thẻ head 
+			ví dụ: <style> CSS </style>
+	#Inline CSS: Sử dụng thuộc tính style trong các thẻ HTML. trong thẻ body
+			ví dụ: <h1 style="color: blue;"> Nội dung </h1>
+<figure>
+	<img src="" alt="" />
+	<figcaption>Nội dung chú thích </figcaption>
+</figure>
+
+
+ol>li*4{}
+   Ngoài ra, thẻ <ol> có thêm một số thuộc tính:	<ol type='A'>
+							    <li></li>
+								 </ol>
+		reversed để đảo ngược chiều đếm số. Thay vì 1, 2, 3 sẽ thành 3, 2, 1.
+		start đặt giá trị bắt đầu, mặc định là 1.
+		type đặt kiểu cho marker:
+			1 số tự nhiên
+			a bảng chữ cái, chữ thường
+			A bằng chữ cái, chữ in hoa
+			i số La Mã, chữ thường
+			I số La Mã, chữ in hoa
+
+
+thẻ inline, thẻ block:
+	Tất cả các thẻ HTML mặc định có thuộc tính display, tùy vào loại thẻ đó thì display sẽ có giá trị tương ứng. Ví dụ: thẻ block sẽ mặc định có display: block, thẻ inline sẽ mặc định có display: inline.
+	Trường hợp thẻ không có thuộc tính display trong user agent stylesheet sẽ là thẻ inline.
+	Có thể tra cứu một thẻ HTML thuộc loại thẻ Inline hay Block tại HTML Reference.
+	Các thẻ Block luôn bắt đầu trên một hàng mới.
+	Các thẻ Block chiếm toàn bộ chiều rộng hết mức có thể. Trình duyệt có thể tự động thêm margin (top, bottom) vào một số thẻ Block như: h1 - h6, <p>, ul, ol, v.v.
+	Thẻ Inline không bắt đầu trên một hàng mới, độ rộng của thẻ Inline tùy thuộc vào nội dung mà nó chứa. Khi có nhiều thẻ Inline đứng cạnh nhau thì chúng sẽ nằm trên cùng một hàng.
+	Thẻ inline có những hạn chế: padding-top, padding-bottom, margin-top, margin-bottom, width, min-width, height, min-height.
+		Khắc phục hạn chế của thẻ inline:		 display: inline-block;
+
+TABLE
+<table></table>		bảng
+<thead>/<thead>		thead có nghĩa table head. phần chứa  các tiêu đề
+<th></th>			table heading. nội dung tiêu đề
+<tbody>/</tbody>		phần thân
+<tr></tr>			table row. phần chứa các nội dung hàng ngang
+<td></td>			table data. nội dung
+thuộc tính colspan="2"		2 cột dọc thành 1 cột dọc.. column span
+thuộc tính rowspan="2"		2 hàng ngang thành 1 hàng ngang.. row span

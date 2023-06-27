@@ -1,0 +1,82 @@
+-Header		đầu trang
+-Navigation		Thanh điều hướng		nằm bên trái, bên phải, phía trên(thường dùng) có thể nằm trong header
+-Main content	nội dung chính
+-Footer		chân trang
+-Other:
+	+ Slideshow	Trình chiếu nhiều nội dung. 
+	+ Slibar		Hộp chứa thanh điều hướng, thường nằm bên trái hoặc bên phải
+	+ Tabbar		Nút điều hướng
+	+ Banner		Ảnh quảng cáo
+	+ Form		Biểu mẫu nhập dữ liệu
+	+ Dialog/Modal	Nội dung trung tâm khi bật lên, xung quanh có lớp phủ
+	+ Toast		Thông báo thể hiện hành động gì đó thành công hay thất bại. Xuất hiện vài giây rồi biến mất. Nằm ở góc trên bên phải màn hình hoặc góc dưới bên trái
+	+ Breadcrumb	Thể hiện chiều sâu, vị trí hiện tại của trang. Tối ưu công cụ tìm kiếm
+
+
+<main></main>			:thẻ chứa bố cục trang, nội dung chính nhưng không được chứa các thẻ <article>, <aside>, <footer>, <header> hoặc <nav> 
+<header class="header"></header>		:làm phần header
+<header></header>			:thẻ giống thẻ div nhưng có ngữ nghĩa. thường làm những phần đầu, thường dùng đầu trang
+<nav class="navbar"></nav>		:thẻ giống thẻ div nhưng có ngữ nghĩa. thường làm nhưng thanh điều hướng chính. nav viết tắt của navigation. 1 trang có thể dùng nhiều thẻ nav
+<footer class="footer"></footer>		:làm phần chân trang footer, hoặc chân của thành phần độc lập. :thẻ giống thẻ div nhưng có ngữ nghĩa.
+<article></article>			:bọc phần nội dung trang. đảm bảo nội dung mang tính độc lập(nội dung không ảnh hưởng tới những thành phần xung quanh)
+<section></section>			:phần, thành phần, thành phần khác nhau
+<aside></aside>			:nội dung bên lề trái, phải, ở dưới cùng(sản phẩm liên quan, bài đăng liên quan,..)
+<figure></figure>			:bài viết chứa hình ảnh, video, âm thanh
+<figcaption></figcaption>		:chú thích cho thẻ <figure>
+<mark></mark>			:đánh dấu nội dung chữ. gây chú ý
+
+ĐẶT 2 CLASS VÀO 1 THẺ. KHI SỬ DỤNG CLASS THỨ 2 THÌ VIẾT SELECTOR:    .CLASS1.CLASS2
+THAY VÌ ĐẶT 2 CLASS VÀO 1 THẺ THÌ TA DÙNG SELECTOR-CSS
+
+
+ĐẶT TÊN
+
+Nếu 1 phần lớn chia thành 2 phần nhỏ thì đặt tên: top, bottom(đối với phần trên và phần dưới) hoặc left,right(đối với phần bên trái và bên phải)
+Ví dụ:	<div class="hero-left"></div>	<div class="hero-right"></div>
+	<div class="popular-top"></div>	<div class="popular-bottom"></div>
+	<div class="media-block"></div>	<div class="content-block"></div>
+Đối với giao diện có phần header lớn thì:
+	- Phần nội dung chính của header thì đặt tên class="hero"
+	- Thông tin(thông điệp) của phần hero đặt tên class="info"
+		+ Thông điệp lớn đặt class="title"(h1) . Thông điệp nhỏ class="sub-title"(h2 h3 h4 h5 h6)
+	- Mô tả đặt class="desc"  		description: mô tả
+	- hàng ngang class="row"		
+	- mũi tên class="arrow"
+	- class="heading"	phần đầu nhưng không phải tiêu đề
+Các phần có chung kích thước trái phải thì đặt class chung: class="main-content" hoặc class="content" 
+class="btn"		: nút bấm dùng chung. (button)
+class="action"
+class="cta"		: Call to action.Nút kêu gọi hành động. Để người dùng tìm hiểu thêm thông tin về sản phẩm, đặt hàng, mua hàng
+class="link"		: nút riêng lẻ
+
+DANH SÁCH
+class="lists"		danh sách
+class="item"	mục
+class="thumb"	thumbnail: ảnh thu nhỏ
+========
+class="stats" 	số liệu thống kê
+class="guides"	hướng dẫn, chỉ dẫn
+class="clients"	khách hàng
+class="controls"	bảng điều khiển
+class="summary"	tóm tắt
+class="trend"	xu hướng
+class="qty"		quantity. số lượng
+class="rating"	xếp hạng
+class="price"	giá bán
+class="feedback"	phản hồi
+class="foot"	phần chân
+========
+
+RANH GIỚI
+class="separate"
+
+PHẦN ROOTER
+class="copyright"	bản quyền
+class="social"	xã hội
+
+ICON
+class="arrow" 	mũi tên
+class="chevron"	biểu tượng hình chữ V. giống với "<" hoặc ">"
+class="dots"	dấu chấm
+class="quotes"	dấu ngoặc kép
+class="quote"	trích dẫn

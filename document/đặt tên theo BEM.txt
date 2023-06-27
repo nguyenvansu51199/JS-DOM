@@ -1,0 +1,21 @@
+ĐẶT TÊN THEO BEM(BLOCK-ELEMENT-MODIFIER)
+-Block: block
+-Element: block__element
+-Modifier:
+	- Block: block--modifier
+	-Element: block__element--modifer
+
+
+block: thẻ cha
+element: thẻ con
+modifier: trạng thái, bổ sung ý nghĩa cho block, element
+
+LỢI ÍCH VÀ LƯU Ý KHI ĐẶT TÊN THEO BEM
+LỢI ÍCH
+	-Loại bỏ id và tên thẻ trong CSS
+	-Gần như không có xếp tầng
+	-Các khối hoàn toàn độc lập
+	-Thống nhất khi làm việc nhóm
+LƯU Ý
+	-Không thể hiện cấu trúc
+	-Một số người không thích

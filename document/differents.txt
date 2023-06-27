@@ -1,0 +1,75 @@
+- tránh trình duyệt nhỏ lại làm xuất hiện thanh cuộn ngang thì thêm max-width: 100%
+	width: 1000px;
+	max-width: 100%;	khi nhỏ hơn 1000px thì max-width sẽ hoạt động
+- các phần tử nằm dọc :
+		display: flex;
+		flex-direction: column;	các thẻ con nằm  thành một cột
+- các phần tử nằm ngang:
+	1. display: inline-block;		nhưng để lại 1 khoảng trắng nhỏ(khoảng cách giữa các dòng) ở giữa nếu 2 phần tử tiếp nhau
+	2. float: left;	
+	3. display: flex;	thẻ cha -> các thẻ con nằm ngang sát vào nhau đè lên thẻ cha. không để lại khoảng trắng nào như display. các thẻ con có thể tràn ra bên ngoài thẻ cha
+	    flex-wrap: wrap;	thẻ cha -> các thẻ con xuống hàng nếu vượt quá thẻ độ rộng thẻ cha
+
+- 2 phần tử con nằm hai đầu trục ngang của thẻ cha:
+	1. thẻ cha: display: flex;		flexbox
+	    một trong hai thẻ con: margin-left(right): auto;
+	    Giả sử có ba thẻ con nhưng muốn thẻ con thứ 2 và 3 nằm sát bên phải thì ta chỉ cần dùng margin-left: auto; vào thẻ con thứ 2
+	2. thẻ cha: display: flex;
+	    justify-content: space-betwen;(ĐƠN GIẢN)		.NHỚ THÊM PADDING VÀO 1 TRONG 2 GẦN NHAU THẺ ĐỂ KHI THU NHỎ TRÁNH 2 PHẦN TỬ GẦN NHAU
+	3. thẻ cha : display: flex;
+	    thẻ con set width(%) sao cho tổng width thẻ con = 100%. (PHỨC TẠP)
+	    thẻ con của thẻ con ở nhiều vị trí khác nhau so với thẻ con. Sử dụng position
+
+- căn phần tử ra giữa :
+	1. margin: 0 auto;	phải khai báo width và là thẻ block(display: block) hoặc nó là thẻ CON của thẻ flex(display:flex)
+	2. thẻ cha(thẻ định vị):  	   position: relatetive;
+	    thẻ con :  	   position: absolute;	
+		  	   left(right): 50%;
+	3. thẻ cha: display: flex;
+	    justify-content: center;	căn phần tử theo chiều ngang
+
+	4. thẻ cha: display: flex;
+	    flex-direction: column;
+	    align-items: center;	
+
+	5. text-align: center;	Nếu không khai báo width thì nó căn giữa theo thẻ cha
+			Nếu khai báo width thì căn giữa theo width của nó
+			Nếu khai báo width mà muốn căn giữa theo thẻ cha thì dùng thêm margin: 0 auto và nó là thẻ block hoặc nó là thẻ con của thẻ flex(display:flex);
+
+	6. text-align: center;	Dùng ở thẻ cha
+
+
+- căn chữ ra giữa làm avatar:
+	1. height: 16px;	thẻ cha
+	    line-height: 16px;	thẻ con ->  dùng line-height để căn giữa theo chiều dọc
+                      text-align: center;	thẻ con -> căn giữa theo chiều ngang(yêu cầu là thẻ block, display: block;)
+	2. display: flex; 		thẻ cha
+	    align-items: center;		thẻ cha. Nếu thẻ cha khai báo height thì căn theo thẻ cha. 
+	    justify-content: center:	thẻ cha. Nếu thẻ cha khai báo width thì căn theo thẻ cha.
+	    đưa nội dung thẻ con vào thẻ span	ví dụ: <div class="avatar"> <span>S</span></div>
+
+- đường ranh giới :
+	1. dùng border			Nếu không có border-radius của ranh dưới
+	2. thêm thẻ <div class="separate"></div>	
+	3. dùng before, after + position(left-right thay thế cho width, top-bottom thay thế cho height)
+
+- duy chuyển phần tử sang 1 vị trí khác
+	1. dùng position
+	2. dùng transform:
+	3. có thể kết hợp 2 cách sử dụng trên	
+
+-căn chỉnh vị trí với đường cơ sở
+	1. vertical-align: bottom;		(TÌM HIỂU THÊM)
+	2. display: block;			Đối với thẻ inline hay inline-block thì có thêm 1 khoảng đệm nhỏ giữa vị trí các dòng
+
+- xuống hàng
+	1. display: flex;
+	    flex-wrap: wrap;		tự động xuống hàng khi vượt quá chiều rộng
+  	    flex-wrap: nowrap;		không xuống hàng khi vượt quá chiều rộng. (giá trị mặc định)
+	2. white-space: nowrap;	nhiều khoảng trắng trở thành 1 khoảng trắng và không xuống hàng khi gặp thẻ </br>
+	    white-space: nomal;		trở lại bình thường.tự động xuống hàng khi vượt quá chiều rộng(giá trị mặc định)
+	    white-space: pre;		thể hiện giống như định dạng trên thẻ html
+	3. word-break: break-all;	xuống hàng khi vượt quá giới hạn. mặc dù chữ không có khoảng cách, dấu gạch ngang(ví dụ link)
+	    word-spacing: 10px;		khoảng cách giữa các từ
+	    word-wrap: break-word;	xuống hàng khi 1 từ quá dài vượt quá giới hạn. TRƯỜNG HỢP ÍT GẶP
+	    word-wrap: normal;		không xuống hàng khi 1 từ quá dài vượt quá giới hạn GIÁ TRỊ MẶC ĐỊNH

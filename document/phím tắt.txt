@@ -1,0 +1,8 @@
+Alt + click(chuột): tạo nhiều con trỏ trên các dòng
+Ctrl + F: tìm kiếm chữ
+Ctrl + X: cắt và sao chép
+Ctrl + D: tìm  và bôi đen nội dung đó. Yêu cầu: phải bôi đen nội dung cần tìm trước
+Ctrl + Space: hiện thanh Emmet
+Ctrl + Shift + L: bôi đen tất cả chữ giống trong khung viewport
+Click vị trí đầu tiên cần bôi đen + (Shift + Click vị trí cuối cùng)
+Alt + shift + mũi tên (lên xuống): coppy dòng nhanh

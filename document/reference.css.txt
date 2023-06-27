@@ -1,0 +1,14 @@
+emmet link css:  link:css
+link resetcss luôn đặt trên cùng để tránh ảnh hưởng tới các linkcss khác
+css property: thừa kế
+min-width: 80px;   độ rộng tối thiểu
+margin-top: 32px;	lề - phía trên
+padding: 8px 16px;	phần đệm
+border-radius: 8px;	bo khung tròn
+border:			khung
+color: white;
+background-color: #1473e6;	màu nền
+font-size: 14px;		kích thước phông chữ
+text-decoration: none;		gạch chân	
+text-align: center;		căn chỉnh: trung tâm	
+display: inline-block

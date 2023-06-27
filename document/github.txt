@@ -1,0 +1,78 @@
+gitTRUY LẦN ĐẦU
+git
+git config --g user.name "Dev name"	trong ngoặc đặt tên(thông tin) của mình
+git config --g user.email "Dev email"		email
+git init 
+git add .
+git commit -m "first commit" 	trong ngoặc là phần đặt tên
+git branch -M main 
+git remote add origin git@github.com:nguyenvansu51199/htmlcss-01.git
+git push -u origin main
+
+
+TẠO  MỚI 
+git init 			
+git add . 
+git commit -m "first commit" 	trong ngoặc là phần đặt tên		
+git branch -M main 		đặt trong nhánh main
+git remote add origin git@github.com:nguyenvansu51199/htmlcss-01.git
+git push -u origin main
+
+
+THÊM VÀO KHO 
+git add .
+git commit -m "first commit"		trong ngoặc là đặt tên cho phần thêm(sửa chữa) vào
+git push -u origin main
+
+
+PHƯƠNG THỨC ĐỒNG BỘ 
+LOCAL(working direcrory -> staging eare -> localrepo)  <->  REMORTEREPO
+local: trên máy tính của mình
+remorterepo: trên git
+Đưa code từ máy lên Git
+	sử dụng lệnh : "git add "		để đưa phần Working Direcrory sang phần Staging Aare
+	sử dụng lệnh : "git commit"	để đưa phần Staging Eare sang phần Localrepo
+	sử dụng lệnh : "git push"		để đưa phần Localrepo sang phần REMORTEREPO
+Lấy code từ Git về máy 
+	sử dụng lệnh: "git pull"		để đưa phần  REMORTEREPO sang phần  Localrepo
+	sử dụng lệnh: "git checkout"	để đưa phần Localrepo sang phần Working Direcrory(qua qua phần Staging Eare)
+
+LẤY CODE TỪ GIT VỀ MÁY 
+vào liên kết GIT của dự án CODE -> DOWNLOAD ZIP
+
+ở thư mục chọn để tải về click chuột phải vào phần GIT BUSH HERE 
+.xuất hiện GIT gõ lệnh:	"git clone https://github.com/nguyenvansu51199/F8-htmlcss-01.git du-an-1"
+https://github.com/nguyenvansu51199/F8-htmlcss-01: là liên kết GIT 
+du-an-1: là phần đặt tên sau khi tải về máy
+
+lệnh: "git pull"	lấy code mới nhất chung 1 nhánh.Dùng khi team làm chung 1 dự án
+
+
+LỆNH GIT CƠ BẢN
+lệnh: "clear"			xóa 
+lệnh: "git status"		hiển thị "nothing to comit, working tree clean": từ lần commit gần nhất thì chưa có sự thay đổi, thay thế nào vào dự án đó
+			hiển thị ""modified: index.html"	"Untracked files: ...style.css"": 	File: index.html có sự thay đổi.  File: style.css	chưa được theo dõi(đang ở phần Working Direcrory)
+lệnh: "git diff index.html"		xuất hiện sự thay đổi nội dung của file: index.html
+			con trỏ trở thành dấu 2 chấm nếu có quá nhiều sự thay đổi. Phím ENTER để xem sự thay đổi nhiều hơn
+gõ: "q"			đưa con trỏ về trạng thái bình thường sau khi sử dụng lệnh "git diff index.html" mà có quá nhiều sự thay đổi khiến con trỏ trở thành dấu 2 chấm
+lệnh: "git add ."		đưa tất cả các file của dự án sang phần Staging Aare
+lệnh: "git add style.css"  	đưa file style.css của dự án sang phần Staging Aare
+lệnh : "git reset HEAD -- index.html		để đưa file index.html từ Staging Aare Working Direcrory
+lệnh: "git commit -m "first commit""	hiển thị "2 files change, 4 insertions(+), 1 deletion(-)": có 2 files thay đổi, 4 thêm, 1 giảm
+lệnh: "git push"		đồng bộ Localrepo với Remorterepo
+
+NHÁNH			song song phát triển nhiều tính năng sau đó gọp lại. Mỗi nhánh là độc lập, riêng biệt
+lệnh: "git branch"		kiểm tra localrepo có bao nhiêu nhánh
+lệnh: "git branch -a"		kiểm tra local và remoterepo có bao nhiêu nhánh
+lệnh: "git branch -c nhanh-1"	tạo nhánh mới và đặt tên là nhanh-1. Hiện tại đang ở nhánh main
+lệnh: "git checkout -b nhanh-2"	tạo nhánh mới và đặt tên là nhanh-2. Hiện tại đang ở nhánh 2
+lệnh: "git checkout nhanh-1"	chuyển sang nhánh 1
+lệnh: "git branch -d nhanh-1"	xóa nhánh 1 trên local. Yêu cầu phải đứng ở nhánh khác và nhánh 1 phải được commi trước khi xóa
+lệnh: "git branch -D nhanh-1"	xóa nhánh 1 trên local. khi nhánh 1 không commit lên trước đó
+lệnh: "git push -d nhanh-1"	xóa nhánh 1 trên remorterepo
+lệnh: "git merge nhanh-1"	lấy code từ nhánh 1 về nhánh đang đứng
+
+
+PHÍM TẮT 
+click chuột phải:	dán nội dung đã copy
+dấu mũi tên lên:	hiển thị lệnh vừa dùng

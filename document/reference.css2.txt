@@ -1,0 +1,526 @@
+link resetcss luôn đặt trên cùng để tránh ảnh hưởng tới các linkcss khác
+link css nên đặt dưới cùng 
+Thẻ     <link rel="preconnect" href=" ">      sẽ giúp “kết nối trước” tới địa chỉ nguồn tài nguyên, 
+
+
+GIẢ SỬ TRANG WEB CHẠY TRÊN MÁY TÍNH THÌ ĐƯỢC NHƯNG CHẠY TRÊN IOS, ANDROID,.. THÌ MỘT SỐ THUỘC TÍNH KHÔNG ĐƯỢC THÌ NÊN KIỂM TRA TIỀN TỐ VÌ MỘT SỐ THUỘC TÍNH CHỈ MANG TÍNH THỬ NGHIỆM TRÊN MỘT SỐ HỆ ĐIỀU HÀNH
+	@supports (a) or (b) {c}			Nếu a hoặc b được hỗ trợ thì c được sử dụng
+
+
+
+
+VÍ DỤ: 	IOS: -webkit-a						a là thuộc tính cần hỗ trợ tiền tố trên hệ điều hành. ví dụ: -webkit-user-select: none;
+	ANDROID: -webkit-a					webkit,o,.. gọi là frefix
+	OPERA: -o-a
+	...
+  
+- Tránh trình duyệt nhỏ lại làm xuất hiện thanh cuộn ngang thì thêm max-width: 100%
+	width: 1000px;
+	max-width: 100%;
+
+
+max-width: 100%		độ rộng tối đa(%) so với thẻ cha
+min-width: 80px;   độ rộng tối thiểu
+margin-top: 32px;	lề - phía trên
+	margin-left(right): auto;		căn chỉnh(chỉ được chiều ngang) theo hướng ngược lại. dùng cả 2 thì căn chỉnh ở giữa
+	wight: 700px;
+						chỉ dành cho thẻ display:block
+	margin: -20px; (giá trị âm)		các phần tử đè lên nhau theo giá trị âm
+MARGIN COLLAPSE :kết quả không như mong đợi của thuộc tính margin. 2 thẻ dùng margin đối đầu nhau(hoặc 2 thẻ cha con)
+	cách xử lí:
+		1. float: left(right)		dùng cả trên 2 thẻ đối đầu(dùng trên thẻ cha hoặc thẻ con)
+		   width: 100%			chỉnh sửa lại bề rộng sau khi sử dụng thuộc tính 
+		2. position:absolute		1 trong 2 thẻ
+		   width: 100%
+		3. display: inline-block	1 trong 2 thẻ
+		   width: 100%
+		4. display: flex		dùng cho thẻ cha con, nếu không có thì dùng thêm thẻ bao bọc.  
+		   flex-direction: column
+	cách tránh margin collapse:
+		1. sử dụng padding đối với thẻ cha con
+		2. sử dụng cộng dồn giá trị về 1 thẻ đối với thẻ đối đầu
+	float: left(right) 	điều chỉnh vị trí cho thẻ trái(phải)
+
+		
+padding: 8px 16px;	đệm thêm một lớp có cùng màu với màu nền(background-color)
+border-radius: 8px;	bo 4 góc 8px
+border-radius: 999px;	giá trị lớn 4 góc bo tròn
+border-radius: 50%	bo thành hình tròn hoặc elip tùy theo kích thước của phần tử
+boder:	20px soild red;			viền có thể chỉnh thêm màu
+border: 20px 30px 20px 10px;		có thể tạo ra 4 kích thước và mỗi màu sắc khác nhau cho 4 vị trí ( top bottom left right)
+border-top(bottom, left, right): 20px
+	
+
+outline: 20px solid green;		viền nhưng không ảnh hưởng đến kích thước dùng để trang trí(nằm bên ngoài border)
+					chỉ tạo ra 1 kích thước chung và 1 màu chung cho 4 vị trí( top bottom left right)
+outline-offset: 10px; 			tạo ra khoảng cách với kích thước hộp
+
+color: white;
+
+
+transform: translateX(40px);	Di chuyển phần tử trên trục hoành cách vị trí đầu 40px
+transform: translateY(100%);	Di chuyển phần tử trên trục tung cách vị trí đầu bằng tỉ lệ phần % của phần tử đó
+
+
+BACKGROUND	
+	TỐI ƯU BACKGROUND: Chọn một màu nền có màu tương đối giống ảnh nền để khi ảnh nền chưa tải xong thì màu nền sẽ xuất hiện để có cảm giác không bất ngờ, không phải lỗi hiển thị
+	background-color: #1473e6;		MÀU NỀN
+	background-image: url(liên kết);	tạo ẢNH NỀN bằng liên kết(ảnh nền khó có thể copy)
+	background-image: url(liên kết 1), url(liên kết 2);	sử dụng nhiều ảnh nề đè lên nhau
+	background-repeat: repeat-x(y);    	lặp lại ảnh nền. xy là 2 trục
+	background-repeat: no-repeat;		(mặc định là repeat)
+
+	background-image: linear-gradient(			màu chuyển
+ 	 	  direction (optional - to bottom),
+  		  color1 (required) stop1 (optional),
+   		 color2 (required) stop2 (optional),
+  	 	 ...
+		);
+		ví dụ: background-image: linear-gradient(30deg(độ) - to top right(vị trí), red 10%, blue 80%);
+	background-size: cover;	hiển thị ảnh nền lấp đầy kích thước của phần tử, một phần của bức ảnh có thể sẽ bị mất đi(ngang hoặc dọc)
+	background-size: contain;	hiển thị ảnh nền nằm gọn bên trong của phần tử, có thể để lại 1 khoảng trắng bên trong
+	background-size: 100% 50%(px);	đặt 1 hoặc 2 giá trị. NẾU 2 giá trị ảnh có thể bị vỡ
+	background-size: 100%;	width= 100%, height tự động
+	background-size: 50px;		width= 50px  height tự động
+
+	background-position: top(bottom, left,right,center, left center, right center, center center, top right, bottom right,...) từ khóa vị trí ảnh.	điều chỉnh vị trí hiển thị của ảnh(background-image)
+	background-position: x% y%;				x,y là 2 trục. tương ứng với từ khóa vị trí ảnh
+	background-position: 50px 30px;			giá trị xuất hiện khoảng màu trắng. Có thể dùng giá trị âm. cách vị trí ảnh 
+	background-position: 30%;			có nghĩa x= 30% y=50%	1 giá trị thì giá trị phía sau là center hoặc 50%
+	background-position: 10px;			có nghĩa x= 10px y=50%
+	background-position bị ảnh hưởng bởi background-origin	
+
+	Background-attachment                          ảnh nền cuộn đi hay đứng lại ở vị trí khi sử dụng thanh cuộn
+	Background-attachment: scroll; 			cuộn ảnh nền theo thanh cuộn(giá trị mặc định)
+	Background-attachment: fixed;			cố định ảnh nền khi sử dụng thanh cuộn
+	Background-attachment: local;			cuộn ảnh nền theo thanh cuộn con(sử dụng thuộc tính overflow)
+	overflow: auto;				tự động xuất hiện thanh cuộn khi kích thước nội dung vượt quá kích thước khai báo của nội dung
+
+	Background-clip: border-box;			background-color, background-image đổ từ border vào trung tâm (mặc định). 
+						NHƯNG GỐC CỦA background-image VẪN Ở PADDING-BOX. TA THẤY Ở BORDER-BOX LÀ ẢNH BỊ REPEAT LẠI
+	Background-clip: padding-box;			background-color, background-image đổ từ padding vào trung tâm
+	Background-clip: content-box;			background-color, background-image ở vị trí content 
+	Background-clip: text;				màu nền đổ vào chữ(thường kết hợp với màu chuyển background-image: linear-gradient)
+
+	background-origin: padding-box;			gốc của ảnh nền(background-image) hiển thị từ padding(giá trị mặc định)
+	background-origin: border-box;			gốc của ảnh nền(background-image) hiển thị từ border
+	background-origin: content-box;			gốc của ảnh nền(background-image) hiển thị từ content
+	background-origin không hoạt động nếu có Background-attachment: fixed;
+	
+	Backdrop-filter: blur();			làm nhòe
+	Backdrop-filter: blur() brightness();		2 thuộc tính, thêm thuộc tính thì chỉ cần thêm 1 dấu cách(space)
+	Backdrop-filter: ...
+	background: #ffffff url("img_tree.png") no-repeat right top;	  backgroundshorthands được sử dung nhiều. Tra cứu: background shorthand css
+
+	HỖ TRỢ IN BACKGROUND		viết vào thẻ body
+	 	print-color-adjust: exact !important;
+   		 -webkit-print-color-adjust: exact !important;		(tiền tố)
+	TỐI ƯU BẢN IN		vì khi lên bản in các vị trí của các thẻ sẽ bị thay đổi nên có thể tối ưu bản in trước khi in	
+		@media sprint {...}
+		@media          hiểu như mang nghĩa "NẾU"
+
+cursor: pointer;		 trỏ chuột : nút bấm
+user-select: none;		chỉ định văn bản có thể chọn(bôi đen) hay không
+		display: flex;
+		justify-content: center;		căn giữa theo chiều ngang
+
+		display: flex;
+		justify-content: space-between;	làm cho thẻ con đầu tiên xa thẻ con cuối xa nhất có thể và cách đều các thẻ con ở giữa(hàng ngang).VIẾT VÀO THẺ CHA
+
+		display: flex;
+		align-items: center;		căn giữa phần tử theo chiều dọc.	Dùng vào thẻ cha -> các thẻ con sẽ căn giữa theo trục nằm ngang
+
+text-decoration: none;		gạch chân	
+text-align: center;		căn chỉnh: trung tâm	
+display: inline-block		hiển thị:
+none:	ẩn
+
+	display: flex;		thẻ cha
+	margin: auto;		thẻ con ->căn chỉnh ở vị trí trung tâm và độ rộng bằng nội dung
+
+opacity: độ mờ  0-1 hoặc 0-100%		
+transition: ease .25s;		sự thay đổi(kết hợp với Pseudo-classes SELECTOR)
+
+	
+	          #			display: none		opacity: 0	  	visibility: hidden
+	    Ẩn khỏi giao diện			✅		✅			✅
+	    Chiếm không gian			❌		✅			✅
+	    Có thể tương tác			❌		✅			❌
+	    Ẩn phần tử con			✅		✅			✅
+	    Tính thừa kế			❌		❌			✅
+	    Hiển thị phần tử con			❌		❌			✅
+	    Hỗ trợ Animations			❌		✅			✅
+
+
+visibility: hidden(visible);	hidden: ẩn, visible: hiển thị. (Ẩn thẻ  và đảm bảo thẻ này không tương tác vào được nữa (không làm mất đi không gian của thẻ đã chiếm)).
+box-sizing: content-box; 	content= width height khai báo			     (mặc định)
+box-sizing: border-box;		content= kích thước width(height) - border - padding
+unit: đơn vị
+color
+	rgb(0,0,0): màu tương ứng với red green blue. giá trị từ 0-255
+	rgba(0,0,0,a): giá trị a là độ xuyên thấu, từ 0 đến 1 
+	Hex	#rrggbb     giá trị chữ cái 0123456789abcdef
+	currentcolor 	lấy màu gần thẻ nhất. ví dụ Lấy màu của thuộc tính color: red;
+	transparent      trong suốt, không màu
+
+
+FONT
+	Kiểu font: Serif(có chân)				nội dung đọc dài, trang blog, in ấn, trích dẫn một câu nói
+		   Sans-serif(không chân)			dùng trong mọi tình huống 
+		   Monospace(kích thước bằng nhau)		viết code mã máy tính
+
+	font-family: Aril, Helvetica, sans-serif;		Dùng nhiều font, các font thứ 2 trở đi mang tính dự phòng.
+	font-size: 14px;		kích thước phông chữ
+	line-height: 1.6;		chiều cao dòng. Đổi giá trị px thành giá trị số: 	line-height(px) : font-size(px) = giá trị số. (1.6)
+	font-size: italic;		chữ nghiêng
+	font-variant: small-caps;	chữ viết hoa thu nhỏ
+	font-weight: 500;		độ dày của chữ(giá trị từ 100-900). Yêu cầu: font-family phải hỗ trợ. chủ yếu dùng giá trị số
+	font-weight: bold, bolder,..	
+	font: italic small-caps bold 12px/30px Georgia, serif;		font shorthands. Tra cứu: font shorthand css
+	letter-spacing: 3px;		khoảng cách giữa các chữ cái (có thể dùng giá trị âm)
+	text-align: center(left,right,justify);	căn chỉnh : trung tâm (trái, phải, dàn đều hai bên).  CĂN THEO ĐỘ RỘNG LOẠI THẺ BLOCK, INLINE. Khi dùng ở thẻ cha thì các thẻ con căn chỉnh ra ở giữa
+	text-align: center;		sẽ không có tác dụng khi có width = giá trị số.(px, vh, vw)
+	text-decoration: none(underline, line-through, overline);		gạch chân: không(gạch dưới, gạch ở giữa(giá trị tiền), gạch ở trên)        có thể dùng nhiều kiểu 
+			text-decoration: solid(dotted,double,..);			nét liền(nét đứt, song song,..)	
+			text-decoration: red;					màu sắt của đường gạch
+			text-decoration: 5px;					kích thước đường gạch
+			text-decoration: underline overline dotted red;
+	text-indent: 10px;		thụt lề dòng đầu tiên(có thể dùng giá trị âm)
+	text-transform: lowercase;	viết thường tất cả
+	text-transform: uppercase;	viết hoa tất cả
+	text-transform: capitalize;	viết hoa tất cả chữ cái đầu	
+	whitespace:
+				1. nhiều khoảng trắng -> 1 khoảng trắng
+				2.nhiều dấu xuống hàng -> 1 dấu xuống hàng
+				3.nội dung chạm tới giới hạn -> xuống hàng 
+		normal: 1 2 3
+		nowarp: 1 2
+		pre:
+		pre-line: 1 3
+		pre-wrap: 3	
+	word-break: break-all;		xuống hàng khi vượt quá giới hạn. mặc dù chữ không có khoảng cách, dấu gạch ngang(ví dụ link)
+	word-spacing: 10px;		khoảng cách giữa các từ
+	text-shadow:  Apx Bpx Cpx rgba(0,0,0,1);		bóng đổ
+					A: giá trị âm thì đổ sang trái, giá trị dương thì đổ sang phải
+					B: giá trị âm thì đổ lên trên, giá trị dương thì đổ xuống dưới
+					C: độ nét của bóng tỉ lệ thuận theo giá trị
+					Tra cứu: cssgenerator.org  -> text shadow
+
+	TỐI ƯU KHI THAY ĐỔI KÍCH THƯỚC VIEWPORT
+		Khi thay đổi kích thước màn hình trở nên nhỏ hơn thì các phần tử sẽ chạm vào nhau(khi dàng hàng bằng display: flex ) thì ta dùng padding-right(left)vào 1 thẻ con
+		word-break: break-all;		xuống hàng khi vượt quá giới hạn. mặc dù chữ không có khoảng cách, dấu gạch ngang(ví dụ link)
+
+	CÁCH HIỂN THỊ DẤU 3 CHẤM
+		display: -webkit-box;
+		-webkit-line-clamp: 2; 		dòng thứ 2 hiển thị dấu ba chấm  	      =====         -webkit-line-clamp: var(--line-clamp, 3);		đặt biến line-clamp giá trị mặc định là 3
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	TỐI ƯU VIỆC SỬ DỤNG FONT. 	dùng trong thẻ body.  Tra cứu :
+		text-rendering: optimizeSpeed;		Tối ưu về tốc độ hiển thị nhưng không chính xác về mặc thiết kế phông chữ. Dùng các trang có nội dung chính là video, ảnh,..
+		text-rendering: optimizeLegibility;		Tối ưu về độ chính xác về mặc thiết kế phông chữ nhưng không nhanh. Dùng cho các trang có nội dung chính là tài liệu trang báo, blog, văn bản
+		-webkit-font-smoothing: antialiased;	loại bỏ răng cưa(làm mịn) trên chữ khi phóng to 	(tiền tố)
+		-moz-osx-font-smoothing: grayscale; 	loại bỏ răng cưa(làm mịn) trên chữ khi phóng to		(tiền tố)	
+
+	SỬ DỤNG FONT AWESOME(biểu tượng)
+		bước 1.	chọn icon bằng Font Awesome icon 	Tra cứu: 	Font Awesome Icons
+		bước 2.	chọn CDN của trang Font AwesomeIcons	Tra cứu: 	Font Awesome CDN
+		bước 3.  	dán CDN	vào thẻ head.		ví dụ: <link rel="stylesheet" href="">
+		bước 4. 	copy class icon đã chọn và đưa vào thẻ <i class="" ></i> 
+	
+
+	THAY ĐỔI FONT-WEIGHT(BORDER HAY KÍCH THƯỚC) BẰNG CÁCH HOVER  SẼ LÀM CÁC PHẦN TỬ BÊN CẠNH CÓ SỰ DUY CHUYỂN(NHÁY MÀNG HÌNH)
+		bỏ phần font-weight thay bằng text-shadow: 1px 0 0 currentColor;		currentColor có nghĩa là lấy màu hiện tại
+		thay border có màu cụ thể thành border trong suốt. border-color: transparent;
+
+		
+IMAGE(HÌNH ẢNH)	 <img src="" alt="">
+	- max-width: 100% ; 			độ rộng tối đa so của thẻ. Tránh hình ảnh to hơn kích thước gốc làm vỡ(bể) ảnh
+
+	- Căn giữa hình ảnh:   1.  display: block;	thẻ <img> trở thành thẻ block
+			margin: 0 auto;	căn giữa bằng margin
+		             2. dùng thẻ block bao bọc thẻ <img>	CÁCH HAY SỬ DỤNG
+			sử dụng text-align: center;  lên thẻ block bao bọc
+			Nếu thẻ bao bọc là thẻ <p> thì sẽ ảnh hưởng đến thẻ <p>. Nên biện pháp này ít hữu hiệu
+		             3. thẻ cha display: flex;		CÁCH HAY SỬ DỤNG
+		                 thẻ con(thẻ img): margin: 0 auto;
+
+	- Duy chuyển hình ảnh sang một vị trí khác:
+			thẻ img trở thành thẻ block rồi sử dụng thuộc tính + width
+			dùng thẻ block(thường dùng thẻ div) bao bọc thẻ <img> và sử dụng thuộc tính display: flex trên thẻ bao bọc
+
+	- Click vào hình ảnh tới một liên kết khác:
+			Dùng thẻ a bao bọc thẻ img	<a href=""><img src="" alt=""></a>
+
+	- Click vào hình ảnh tạo ra một hành động mới
+			Dùng thẻ button bao bọc thẻ img	<button><img src="" alt=""></button>
+
+	- Tải chậm hình ảnh khi hình ảnh chưa đến vị trí hiển thị của người nhìn(hình ảnh ở xa khung hình hiển thị đầu tiên) để tiết kiệm băng thông. Thêm thuộc tính loading="lazy" vào thẻ <img>
+		<img loading="lazy" src="" alt="">
+
+	- Không bị giật nội dung khi hình ảnh chưa tải xong
+		object-fit: cover;		hiển thị hình ảnh lấp đầy kích thước của phần tử, một phần của bức ảnh có thể sẽ bị mất đi(ngang hoặc dọc) nhưng vẫn giữ đúng tỉ lệ hình ảnh
+		object-fit: contain;		hiển thị hình ảnh nằm gọn bên trong của phần tử, có thể để lại 1 khoảng trắng bên trong nhưng vẫn giữ đúng tỉ lệ hình ảnh
+
+	- object-position: top right;(bottom, left,right,center,..)		điều chỉnh vị trí hiển thị của ảnh(<img>)
+
+	- TẠO AVATAR 
+		width: 100px;		tạo kích thước hình vuông vì là avatar
+		height: 100px;
+		object-fit: cover;
+		border-radius: 50%;
+	
+	- Chỉnh màu, tương phản, độ nhòe ảnh, ... : filter: 
+	- Nhòe ảnh hoặc background ra các phía : filter: blur(5px);
+	-
+		...
+		XEM THÊM		
+
+
+	- Bọc văn bản xung quanh ảnh		
+				float: left(right);		thẻ img
+		
+
+SỬ DỤNG BACKGROUND HAY IMG
+	img :		là một phần của nội dung
+	       		hỗ trợ in trang kèm hình ảnh
+			muốn Google index hình ảnh
+			tối ưu Web Accessibility
+	
+	background: 	hình ảnh mang tính  trang trí
+			không muốn ảnh đưa vào bản in
+			không index hình ảnh lên google
+			CSS Sprites,  Repeat image
+
+POSITION
+	1. Flow layout (bố cục luồng/ luồng bình thường)
+	2. Positioned (được định vị) 
+	     top
+	     right	
+	     bottom
+	     left
+	     z-index		định vị theo chiều sâu. quyết định phần tử nào đè lên phần tử nào.  giá trị number: -2, -1, 1, 2, ... (không nên dùng number= 0)
+Có thể dùng định vị left và right để thay cho width thẻ con. Khi phần tử con muốn có độ rộng linh hoạt so với thẻ cha. width cha tăng thì width con tăng
+Có thể dùng định vị top và bottom để thay cho height thẻ con. Khi phần tử con muốn có chiều cao linh hoạt so với thẻ cha. height cha tăng thì height con tăng
+
+position: static(default);   1 
+position: relative;   	1 2	định vị theo vị trí ban đầu của nó
+position: absolute;	2  	không gian bị thu hẹp
+	TH 1: không có thẻ cha được định vị
+		=> định vị theo vị trí thẻ <body>
+	TH 2: có thẻ cha được định vị
+		=> định vị theo vị trí thẻ cha gần nhất(được định vị)
+position: fixed;	2	cố định. định vị theo viewport, không gian bị thu hẹp. tuy đã được định vị nhưng vẫn phải đặt vị trí 
+	inset: 0 	giá trị = 0 thì phủ. (inset=left right top bottom = 0)
+	left:	
+	right:
+position: sticky;	1 2 định vị theo thẻ cha gần nhất có thanh cuộn	
+
+	(left-right thay thế cho width, top-bottom thay thế cho height)
+	THƯỜNG DÙNG POSTITON: STICKY CHO PHẦN NAVIGATION NẰM NGANG ĐẦU TRANG. VÌ STICKY LINH HOẠT(TẠO ĐƯỢC MỘT KHOẢNG TRỐNG,
+	 CÁCH MẶT NẰM NGANG, VÀ KÍCH THƯỚC PHẦN NAVIGATION CÓ KÍCH THƯỚC VỪA PHẢI)
+
+FLEX BOX
+flex-container(thẻ cha)
+	justify-content: flex-start;	căn các phần tử sang phía bên trái(phía main-start). GÍA TRỊ MẶC ĐỊNH
+	justify-content: flex-end;	căn các phần tử sang phía bên phải(phía main-end)
+	justify-content: center;		căn các phần tử ra giữa
+	justify-content: space-between;	căn các phần tử ra xa nhất có thể. 
+	justify-content: space-around;	tạo ra khoảng cách trái phải mỗi phần tử. khoảng cách trái phải mỗi phần tử bằng nhau
+	justify-content: space-evenly;	tạo ra khoảng cách giữa các phần tử. mỗi khoảng cách giữa các phần tử là bằng nhau
+	align-items: stretch;		chiều cao của thẻ con bằng nhau và bằng thẻ cha. GÍA TRỊ MẶC ĐỊNH
+	align-items: flex-start;		các thẻ con dồn lên phía trên(top), căn theo chiều cao. đồng thời trở về đúng kích thước của nó
+	align-items: flex-end;		các thẻ con dồn lên phía dưới(bottom)căn theo chiều cao. đồng thời trở về đúng kích thước của nó
+	align-items: center;		các thẻ con căn giữa chiều cao. đồng thời trở về đúng kích thước của nó
+	align-items: baseline;		các thẻ con căn theo đường cơ sở
+	flex-wrap: nowrap;		không xuống hàng. GÍA TRỊ MẶC ĐỊNH
+	flex-wrap: wrap;		xuống hàng
+	flex-wrap: wrap-reverse;	xuống hàng và đảo ngược vị trí
+	align-content: stretch;		giống như align-items nhưng nhiều hơn 1 hàng ngang. GÍA TRỊ MẶC ĐỊNH
+	align-content: flex-start;		giống như align-items nhưng nhiều hơn 1 hàng ngang
+	align-content: flex-end;		giống như align-items nhưng nhiều hơn 1 hàng ngang
+	align-content: center;		giống như align-items nhưng nhiều hơn 1 hàng ngang
+	align-content: space-between;
+	align-content:  space-around;
+	align-content: space-evenly;
+	flex-direction: row;		dàn hàng ngang các thẻ con. GÍA TRỊ MẶC ĐỊNH
+	flex-direction: column;		dàn hàng dọc các thẻ con
+	flex-flow:	A B;		Viết gộp(tắt) của flex-direction và flex-wrap; A là flex-direction, B là flex-wrap
+
+Flex-item(thẻ con)
+	align-self:		;	giống như align-items nhưng chỉ định 1 hay một vài thẻ con
+	flex-grow: 1;	định kích thước của thẻ con. CHIA PHẦN
+	flex-grow: 0;	kích thước mặc định.GIÁ TRỊ MẶC ĐỊNH
+	flex-shrink: 1;	co kích thước lại khi vượt quá kích thước thẻ cha. TRÁI NGƯỢC VỚI FLEX-GROW GIÁ TRỊ MẶC ĐỊNH
+	flex-shrink: 0;	không co
+	flex-basis:	;	giống như width. 
+	flex-basis, flex-shrink, flex-grow định kích thước tối thiểu. kích thước tối đa
+		KÍCH THƯỚC TỐI THIỂU 20%		flex-basis: 20%;
+						flex-shrink: 0;
+						flex-grow: 1;
+		KÍCH THƯỚC TỐI ĐA 20%		flex-basis: 20%;
+						flex-shrink: 1;
+						flex-grow: 0;
+	flex: A B C		viết tắt(gộp). A là flex-grow, B là flex-shrink, C là flex-basis	
+	order: ; 		Hoán đổi vị trí thẻ con. GIÁ TRỊ NUMBER
+	margin:		margin thẻ con ở giữa sẽ kéo theo margin thẻ conbên cạnh. MARGIN Ở FLEX-ITEM TRỞ NÊN MẠNH MẼ HƠN
+	margin: auto;	căn giữa 4 hướng
+
+
+FLEX
+display: flex;	dàn hàng ngang các phần tử con. các phần tử con đè lên thẻ cha và nằm sát vào nhau(sử dụng ở thẻ cha). Độ rộng thẻ cha bằng độ rộng của thẻ cha nó và có thể rộng hơn.
+display: inline-flex;	dàn hàng ngang các phần tử con. các phần tử con đè lên thẻ cha và nằm sát vào nhau(sử dụng ở thẻ cha). độ rộng của thẻ con bằng độ rộng thẻ cha. Giống thuộc tính display: inline;
+flex-direction: column;	các thẻ con sẽ trở thành 1 cột	(XEM THÊM)
+flex-direction: row-reverse;	các thẻ con sẽ trở thành 1 hàng ngang nhưng đảo ngược vị trí
+flex-direction: column-reverse;	các thẻ con sẽ trở thành 1 hàng dọc nhưng đảo ngược vị trí
+
+flex-grow: 0; 	Phần tử sẽ không phát triển nếu có sẵn dung lượng. Nó sẽ chỉ sử dụng không gian nó cần.GIÁ TRỊ MẶC ĐỊNH. (XEM THÊM)
+flex-grow: 1;	Phần tử sẽ phát triển theo hệ số 1 . Nó sẽ lấp đầy khoảng trống còn lại nếu không có mục flexbox nào khác có flex-growgiá trị.
+->mang ý nghĩa chia phần cho phần tử con lấp đầy lên thẻ cha. 	Nếu thẻ con có giá trị = 0 thì nó chỉ cần không gian vừa đủ của nó(mặc định)
+			            			Nếu thẻ con có giá trị > 0 thì bắt đầu chia phần theo tỉ lệ 
+
+flex-shrink: 1;	Nếu không có đủ dung lượng trong trục chính của vùng chứa, phần tử sẽ co lại theo hệ số 1 và sẽ bọc nội dung của nó.
+		Nội dung vẫn có thể bị tràn ra ngoài vì nội dung quá lớn so với phần co lại. GIÁ TRỊ MẶC ĐỊNH. (XEM THÊM)
+flex-shrink: 0;	Phần tử sẽ không co lại: nó sẽ giữ nguyên chiều rộng cần thiết và không bao bọc nội dung của nó. Anh chị em của nó sẽ co lại để nhường chỗ cho phần tử đó
+		Bởi vì phần tử đích sẽ không bọc nội dung của nó, nên có khả năng nội dung của bộ chứa flexbox sẽ bị tràn .
+-> mang ý nghĩa co lại.
+
+
+display: flex;
+justify-content: space-between;	tách 2 phần tử con ra sát 2 đầu và chia đều các phần tử con ở giữa(sử dụng ở thẻ cha, thẻ cha có kích thước cụ thể)
+
+display: flex;
+align-items: center;		căn giữa  các phần tử con bằng trục nằm ngang.(sử dụng ở thẻ cha)
+align-items: flex-start;		các phần tử con được đặt ở đầu khối. Đồng thời các phần tử con trở về kích thước khai báo của nó
+align-items: flex-end;		các phần tử con được đặt ở cuối khối. Đồng thời các phần tử con trở về kích thước khai báo của nó
+
+
+display: flex;
+width: 100%;(thẻ con(thẻ img))	width thẻ con(thẻ img) nối tiếp nhau nằm bên trong thẻ cha 
+THƯỜNG DÙNG KHI KÍCH THƯỚC THẺ CON(THẺ IMG) TO HƠN THẺ CHA NHƯNG MUỐN THẺ CON NẰM BÊN TRONG THẺ CHA
+
+display: flex;
+flex: 1;		thẻ con thứ nhất.	Chia phần thẻ con lên thẻ cha. 1/4 phần		"THUỘC TÍNH FLEX-GROW"
+flex: 3;		thẻ con tiếp theo	Chia phần con lên thẻ cha. 3/4 phần
+Có thể dùng %. vượt quá 100% thì xuống hàng
+
+display: flex;
+flex-wrap: wrap;	tự động xuống hàng khi vượt quá chiều rộng
+flex-wrap: nowrap;	không xuống hàng khi vượt quá chiều rộng. giá trị mặc định
+gap: 13px 16px;	khoảng cách giữa các hàng ngang là 13px. khoảng cách giữa các cột là 16px;	Có thể thay thế cho margin tùy theo trường hợp
+
+XỬ LÝ KHOẢNG TRẮNG
+white-space: nowrap;	không xuống hàng
+white-space: nomal;	trở lại bình thường
+
+THANH CUỘN
+scroll-behavior: smooth;	hiệu ứng cuộn mượt
+scroll-behavior: auto;		hiệu ứng cuộn nhanh,nhảy. MẶC ĐỊNH
+
+overscroll-behavior:		cuộn chuỗi. Thẻ con có thanh cuộn và thẻ cha có thanh cuộn
+overscroll-behavior: auto(default)	cuộn hết thẻ con thì cuộn thẻ cha mặc dù chưa click ra ngoài. Giá trị mặc định
+overscroll-behavior: contain	cuộn hết thẻ con thì dừng lại. Click ra ngoài thì cuộn thẻ cha. Khi sử dụng ở mobie thì có thêm hiệu ứng nhún khi cuộn hết thẻ. Xuất hiện "Tải lại trang"
+overscroll-behavior: none;	cuộn hết thẻ con thì dừng lại. Click ra ngoài thì cuộn thẻ cha.
+
+TÙY BIẾN SCROLLBAR	màu sắc kích thước thanh cuộn
+/* width */				độ rộng thanh cuộn
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {		
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {		tay thanh cuộn
+  background: #888;
+}
+
+/* Handle on hover */			tay thanh cuộn khi hover
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+Khi muốn đặt vào class: box. thì	.box::-webkit-scrollbar {
+ 			   width: 10px;
+			}
+
+OVERFLOW
+overflow-x:  ;
+overflow-y:  ;
+overflow: x y;		x y là 2 trục
+
+overflow: overlay;		thanh cuộn nổi. thanh cuộn Đè lên nội dung. Thường dùng thanh cuộn nhỏ có màu gần như trong suốt để ít nhìn thấy thanh cuộn nhưng vẫn đầy nội dung.
+			Ít trình duyệt được hỗ trợ sử dụng
+
+overflow: visible;		nội dung tràn ra bên ngoài hộp. MẶC ĐỊNH
+overflow: auto;		tự động xuất hiện thanh cuộn khi kích thước nội dung vượt quá kích thước khai báo của nội dung
+overflow: hidden;		nội dung tràn ra ngoài hộp sẽ bị ẩn. Nội dung có thể được cuộn theo chương trình .
+overflow: clip;		nội dung tràn ra ngoài hộp sẽ bị ẩn.. Nội dung không thể cuộn. Cấm cuộn
+overflow: scroll;		xuất hiện thanh cuộn mặc dù nội dung bên trong chưa vượt quá kích thước
+
+BOX-SHADOW
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+https://cssgenerator.org/box-shadow-css-generator.html
+
+THUỘC TÍNH CSS KHÁC
+pointer-events : none;			không cho phép người dùng tương tác với phần tử(tải ảnh, hover, click đi tới đường dẫn)	
+mix-blend-mode: different; 		so sánh. XEM THÊM
+counters				biến đếm. có thể làm thủ công. XEM THÊM
+clip-path: circle(25% at x y);		cắt theo hình tròn.	25% là đường kính hình tròn cần tạo. at là bắt buộc khi dùng x y.  x và y là 2 trục. đơn vị x y là px hoặc %. gốc của trục x y là góc trái trên
+clip-path: inset(a b c d);			cắt theo hình chữ nhật.  a b c d tạo kích thước top right bottom left
+clip-path: inset(a b c d round e f);		e f là bo góc. round là bắt buộc khi dùng bo góc e f
+clip-path: polygon(x1 y1, x2 y2, x3 y3);	cắt theo hình đa giác. x1 y1 là tọa độ góc đầu tiên. x2 y2 là tọa độ góc thứ 2, x3 y3 là tọa độ góc thứ 3,... Sau đó nối các tọa độ góc với nhau tạo thành một đa giác
+Hàm calc()
+
+PHẦN TỬ GIẢ
+NÊN TRÁNH DÙNG CHUNG PHẦN TẠO DẤU 3 CHẤM. VÌ TRONG ĐÓ CÓ OVERFLOW:HIDDEN.
+SỬ DỤNG PHẦN TỬ GIẢ(CÓ POSITION) SẼ RỜI KHỎI FLOWLAYOUT. SẼ BỊ ẨN BỞI OVERFLOW:HIDDEN KHI PHẦN TỬ GIẢ TRÀN RA NGOÀI HỘP
+
+Đối với ::before hoặc ::after thì
+h1::before {
+   content: "";		nội dung phần tử giả(bắt buộc)
+   display: block;		đặt tên thẻ;(bắt buộc khi tạo khối)		display: inline; (là mặc định)
+   position: absolute;		định vị lên thẻ cha chính là thẻ h1
+   ...
+}
+
+
+::before 		tạo thêm thẻ giả(nội dung) đứng đầu tiên trong thẻ chính
+::after 		tạo thêm thẻ giả(nội dung) đứng sau cùng trong thẻ chính
+::first-letter 		chữ cái đầu tiên trong thẻ chính.Chỉ hoạt trên thẻ block, inline-block. Chỉ dùng được 1 số thuộc tính
+::first-line		dòng đầu tiên trong thẻ chính. Chỉ hoạt trên thẻ block, inline-block. Chỉ dùng được 1 số thuộc tính
+::selection		sự lựa chọn. bôi chuột(bôi đen). Chỉ hoạt động trên thẻ p.Chỉ dùng được 1 số thuộc tính. Muốn hoạt động trên tất cả thì dùng:		*::selection
+::marker		Những chấm tròn (hoặc vòng tròn, chấm vuông, số thứ tự, v.v) tại các đầu mục của thẻ <ul>, <ol>. Chỉ dùng được 1 số thuộc tính.
+
+phần tử giả là con của thẻ chính. Muốn căn giữa theo chiều ngang vẫn được. Dùng thuộc tính display: flex; ở thẻ chính
+
+
+ĐẶT BIẾN		sau này chỉnh sửa thì chỉ cần sửa 1 nơi
+
+Đặt biến dùng chung  
+		:root {					thẻ :root {} giống như thẻ html. Đặt biến vào thẻ html hay thẻ root đều được. 
+		  --font-heading: sen;				đặt biến font-heading = sen
+		  --primary-color: red;
+		  --secondary-color: blue;
+		  --spacing: 30px;
+		}
+
+		sử dụng biến:
+ 		   font-family: var(--font-heading);			có nghĩa var(--font-heading) = sen;   ->  font-family: sen;
+		  margin-left: calc(-1 * var(--spacing));		có nghĩa margin-left: -30px;
+
+Phạm vi sử dụng: đặt biến dùng chung chỉ cho thẻ đó, thẻ con  của nó và sử dụng ngay tại thẻ 
+		font-family: var(--font-heading, sen);		sau dấu "," là đặt giá trị mặc định. giá trị  mặc định ở đây là sen
+ví dụ		line-clamp: var(--line-clamp, 3);			đặt biến --line-clamp có giá trị mặc định là 3	
+		background: var(--primary-color, #FFB900);	
+
+MÀU SẮC
+currentColor: 	màu của mặc định. Thường là màu đen
+transparents: 	trong suốt
+
+
+TABLE
+border-collapse: separate;	tạo viền(border) mỗi nội dung. GIÁ TRỊ MẶC ĐỊNH
+border-collapse: collapse;	hủy viền border mỗi nội dung
