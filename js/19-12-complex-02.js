@@ -1,7 +1,17 @@
 function createTodoElement(todo) {
-  const liElement = document.createElement('li');
-  liElement.textContent = todo.title;
+  if (!todo) return null;
+  // find template
+  const todoTemplate = document.getElementById('todoTemplate');
+  if (!todoTemplate) return null;
+
+  // clone li element
+  const liElement = todoTemplate.content.firstElementChild.cloneNode(true);
   liElement.dataset.id = todo.id;
+
+  // update content and needed
+  const titleElement = liElement.querySelector('.todo__title');
+  if (titleElement) titleElement.textContent = todo.title;
+
   return liElement;
 }
 
@@ -9,18 +19,18 @@ function renderTodoList(todoList, ulElementId) {
   if (!Array.isArray(todoList) || todoList.length === 0) return;
 
   const ulElement = document.getElementById(ulElementId);
-  if (!ulElement) return;
 
+  // find ul element
+  // loop through todoList
+  // each todo -> create li element -> append to ul
   for (const todo of todoList) {
     const liElement = createTodoElement(todo);
     ulElement.appendChild(liElement);
   }
 }
 
-// main
 (() => {
-  console.log('worksss');
-
+  console.log('works');
   const todoList = [
     { id: 1, title: 'Learn Javascript' },
     { id: 2, title: 'Learn NextJS' },
