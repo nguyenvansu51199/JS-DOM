@@ -1,6 +1,0 @@
-tối ưu về bản in
-tối ưu về dấu ba chấm
-tối ưu về xuống hàng
-tối ưu khi thu nhỏ viewport
-hover dấu chấm control màu bình thường có trỏ chuột cursor: pointer;
-hover dấu chấm control có class="active" (màu khác biệt)có trỏ chuột cursor: auto;
