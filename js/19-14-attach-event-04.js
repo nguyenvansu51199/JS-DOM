@@ -80,13 +80,20 @@ function renderTodoList(todoList, ulElementId) {
   }
 }
 
-(() => {
-  console.log('works');
-  const todoList = [
-    { id: 1, title: 'Learn Javascript', status: 'pending' },
-    { id: 2, title: 'Learn NextJS', status: 'completed' },
-    { id: 3, title: 'Learn ReactJS', status: 'pending' },
-  ];
+function getTodoList() {
+  try {
+    return JSON.parse(localStorage.getItem('todo_list'));
+  } catch {
+    return [];
+  }
+}
 
+(() => {
+  // const todoList = [
+  //   { id: 1, title: 'Learn Javascript', status: 'pending' },
+  //   { id: 2, title: 'Learn NextJS', status: 'completed' },
+  //   { id: 3, title: 'Learn ReactJS', status: 'pending' },
+  // ];
+  const todoList = getTodoList();
   renderTodoList(todoList, 'todoList');
 })();
