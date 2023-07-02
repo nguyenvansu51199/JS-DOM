@@ -5,76 +5,58 @@ function createTodoElement(todo) {
   if (!todoTemplate) return null;
 
   // clone li element
-  const liElement = todoTemplate.content.firstElementChild.cloneNode(true);
-  liElement.dataset.id = todo.id;
-  liElement.dataset.status = todo.status;
+  const todoElement = todoTemplate.content.firstElementChild.cloneNode(true);
+  todoElement.dataset.id = todo.id;
+  todoElement.dataset.status = todo.status;
 
   // render todo status
-  const divElement = liElement.querySelector('div.todo');
+  const divElement = todoElement.querySelector('div.todo');
   if (divElement) {
     const alertClass = todo.status === 'completed' ? 'alert-success' : 'alert-secondary';
-    divElement.classList.remove();
+    divElement.classList.remove('alert-secondary');
     divElement.classList.add(alertClass);
   }
 
   // update content and needed
-  const titleElement = liElement.querySelector('.todo__title');
+  const titleElement = todoElement.querySelector('.todo__title');
   if (titleElement) titleElement.textContent = todo.title;
 
-  //TODO
-  // attach click event for button mark-as-done
-  const markAsDoneButton = liElement.querySelector('button.mark-as-done');
+  // TODO: attach event for buttons
+  // add click event  for mark-as-done button
+  const markAsDoneButton = todoElement.querySelector('button.mark-as-done');
   if (markAsDoneButton) {
-    // render color for Finish button
-    const currentColorBt = todo.status === 'pending' ? 'btn-dark' : 'btn-success';
-    markAsDoneButton.classList.remove('btn-success');
-    markAsDoneButton.classList.add(currentColorBt);
-
-    // render text Content for Finish button
-    const alertText = todo.status === 'pending' ? 'Finish' : 'Reset';
-    markAsDoneButton.textContent = alertText;
-
-    // Event
     markAsDoneButton.addEventListener('click', () => {
-      const currentStatus = liElement.dataset.status;
+      // update status for localstorage
+      const currentStatus = todoElement.dataset.status;
       const newStatus = currentStatus === 'pending' ? 'completed' : 'pending';
       const todoList = getTodoList();
       const index = todoList.findIndex((x) => x.id === todo.id);
+      todoList[index].status = newStatus;
+      localStorage.setItem('todo_list', JSON.stringify(todoList));
 
-      if (index >= 0) {
-        todoList[index].status = newStatus;
-        localStorage.setItem('todo_list', JSON.stringify(todoList));
-      }
+      // event
+      todoElement.dataset.status = currentStatus === 'pending' ? 'completed' : 'pending';
 
-      liElement.dataset.status = currentStatus === 'pending' ? 'completed' : 'pending';
-
-      const newClassStatus = currentStatus === 'pending' ? 'alert-success' : 'alert-secondary';
+      const newAlertClass = currentStatus === 'pending' ? 'alert-success' : 'alert-secondary';
       divElement.classList.remove('alert-success', 'alert-secondary');
-      divElement.classList.add(newClassStatus);
-
-      // attack click event color for Finish button
-      const colorFinishButoon = currentStatus === 'pending' ? 'btn-success' : 'btn-dark';
-      markAsDoneButton.classList.remove('btn-success', 'btn-dark');
-      markAsDoneButton.classList.add(colorFinishButoon);
-
-      // attack click event textContent for Finish button
-      const newContent = currentStatus === 'pending' ? 'Reset' : 'Finish';
-      markAsDoneButton.textContent = newContent;
+      divElement.classList.add(newAlertClass);
     });
   }
 
-  const removeButton = liElement.querySelector('button.remove');
+  // add click event for remove button
+  const removeButton = todoElement.querySelector('button.remove');
   if (removeButton) {
     removeButton.addEventListener('click', () => {
+      // update status for localstorage;
       const todoList = getTodoList();
       const newTodoList = todoList.filter((x) => x.id !== todo.id);
       localStorage.setItem('todo_list', JSON.stringify(newTodoList));
-
-      liElement.remove();
+      // event click
+      todoElement.remove();
     });
   }
 
-  return liElement;
+  return todoElement;
 }
 
 function renderTodoList(todoList, ulElementId) {
@@ -100,6 +82,7 @@ function getTodoList() {
 }
 
 (() => {
+  // console.log('works');
   // const todoList = [
   //   { id: 1, title: 'Learn Javascript', status: 'pending' },
   //   { id: 2, title: 'Learn NextJS', status: 'completed' },

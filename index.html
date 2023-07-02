@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Learn Dom</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,13 +13,21 @@
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
-    <h1 id="title">Easy Frontend</h1>
+    <section class="my-4">
+      <div class="container">
+        <form id="todoFormId">
+          <div class="mb-3">
+            <label for="todoText" class="form-label">What are you going to do?</label>
+            <input type="text" class="form-control" id="todoText" />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </section>
 
     <!-- <ul id="todoList"></ul> -->
     <section class="my-4">
       <div class="container">
-        <h1>Todo List</h1>
-
         <ul id="todoList" class="todo-list"></ul>
       </div>
     </section>
@@ -41,7 +49,7 @@
       </li>
     </template>
 
-    <script src="./js/19-15.js"></script>
+    <script src="./js/19-18-create-todo.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
