@@ -41,8 +41,6 @@ function createTodoElement(todo, params) {
   // update content and needed
   const titleElement = todoElement.querySelector('.todo__title');
   if (titleElement) titleElement.textContent = todo.title;
-
-  // check if we should show it or not
   todoElement.hidden = !isMatch(todoElement, params);
 
   // TODO: attach event for buttons
@@ -92,13 +90,9 @@ function createTodoElement(todo, params) {
   const editButton = todoElement.querySelector('button.edit');
   if (editButton) {
     editButton.addEventListener('click', () => {
-      // need to get todo from local storage
-      // as todo data can be outdated
+      // populate data to todo form
       const todoList = getTodoList();
       const latestTodo = todoList.find((x) => x.id === todo.id);
-
-      if (!latestTodo) return;
-      // populate data to todo form
       populateTodoForm(latestTodo);
     });
   }
@@ -145,39 +139,26 @@ function getTodoList() {
 
 function handleTodoFormSubmit(event) {
   event.preventDefault();
-
-  const todoForm = document.getElementById('todoFormId');
-  if (!todoForm) return;
+  console.log('form submit');
 
   // get form values
   // validate form values
   const todoInput = document.getElementById('todoText');
   if (!todoInput) return;
+  const todoForm = document.getElementById('todoFormId');
 
-  // determine add or edit mode
   const isEdit = Boolean(todoForm.dataset.id);
+  const todoList = getTodoList();
 
   if (isEdit) {
-    //find current todo
-    const todoList = getTodoList();
     const index = todoList.findIndex((x) => x.id.toString() === todoForm.dataset.id);
-    if (index < 0) return;
-
-    // update content
     todoList[index].title = todoInput.value;
-    // save
     localStorage.setItem('todo_list', JSON.stringify(todoList));
 
-    // apply DOM changes
-    // find li element having id = todoForm.dataset.id
     const liElement = document.querySelector(`ul#todoList > li[data-id="${todoForm.dataset.id}"]`);
-    if (liElement) {
-      // liElement.textContent = todoInput.value;
-      const titleElement = liElement.querySelector('.todo__title');
-      if (titleElement) titleElement.textContent = todoInput.value;
-    }
+    const titleElement = liElement.querySelector('.todo__title');
+    if (titleElement) titleElement.textContent = todoInput.value;
   } else {
-    // add mode
     const todoText = todoInput.value;
     const newTodo = {
       id: Date.now(),
@@ -186,7 +167,6 @@ function handleTodoFormSubmit(event) {
     };
 
     // save
-    const todoList = getTodoList();
     todoList.push(newTodo);
     localStorage.setItem('todo_list', JSON.stringify(todoList));
 
@@ -197,8 +177,8 @@ function handleTodoFormSubmit(event) {
     ulElement.appendChild(newLiElement);
   }
 
-  // reset form
   delete todoForm.dataset.id;
+  // reset form
   todoForm.reset();
 }
 

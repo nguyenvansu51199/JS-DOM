@@ -1,25 +1,4 @@
-function isMatchStatus(liElement, filterstatus) {
-  return filterstatus === 'all' || liElement.dataset.status === filterstatus;
-}
-
-function isMatchSearch(liElement, searchTerm) {
-  if (!liElement) return false;
-  if (searchTerm === '') return true;
-
-  const titleElement = liElement.querySelector('p.todo__title');
-  if (!titleElement) return false;
-
-  return titleElement.textContent.toLowerCase().includes(searchTerm.toLowerCase());
-}
-
-function isMatch(liElement, params) {
-  return (
-    isMatchSearch(liElement, params.get('searchTerm')) &&
-    isMatchStatus(liElement, params.get('status'))
-  );
-}
-
-function createTodoElement(todo, params) {
+function createTodoElement(todo) {
   if (!todo) return null;
   // find template
   const todoTemplate = document.getElementById('todoTemplate');
@@ -41,9 +20,6 @@ function createTodoElement(todo, params) {
   // update content and needed
   const titleElement = todoElement.querySelector('.todo__title');
   if (titleElement) titleElement.textContent = todo.title;
-
-  // check if we should show it or not
-  todoElement.hidden = !isMatch(todoElement, params);
 
   // TODO: attach event for buttons
   // add click event  for mark-as-done button
@@ -117,11 +93,18 @@ function populateTodoForm(todo) {
   // set values for form controls
   // set todoText input
   const todoInput = document.getElementById('todoText');
-  if (!todoInput) return;
-  todoInput.value = todo.title;
+  if (todoInput) {
+    todoInput.value = todo.title;
+  }
+
+  // set value for checkbox
+  const todoCheckbox = document.getElementById('todoCheckboxId');
+  if (todoCheckbox) {
+    todoCheckbox.checked = todo.status === 'pending' ? false : true;
+  }
 }
 
-function renderTodoList(todoList, ulElementId, params) {
+function renderTodoList(todoList, ulElementId) {
   if (!Array.isArray(todoList) || todoList.length === 0) return;
 
   const ulElement = document.getElementById(ulElementId);
@@ -130,7 +113,7 @@ function renderTodoList(todoList, ulElementId, params) {
   // loop through todoList
   // each todo -> create li element -> append to ul
   for (const todo of todoList) {
-    const liElement = createTodoElement(todo, params);
+    const liElement = createTodoElement(todo);
     ulElement.appendChild(liElement);
   }
 }
@@ -152,12 +135,15 @@ function handleTodoFormSubmit(event) {
   // get form values
   // validate form values
   const todoInput = document.getElementById('todoText');
-  if (!todoInput) return;
+  const todoCheckbox = document.getElementById('todoCheckboxId');
 
   // determine add or edit mode
   const isEdit = Boolean(todoForm.dataset.id);
 
   if (isEdit) {
+    const todoText = todoInput.value;
+    if (todoText.length === 0) return;
+
     //find current todo
     const todoList = getTodoList();
     const index = todoList.findIndex((x) => x.id.toString() === todoForm.dataset.id);
@@ -165,6 +151,8 @@ function handleTodoFormSubmit(event) {
 
     // update content
     todoList[index].title = todoInput.value;
+    todoList[index].status = todoCheckbox.checked === true ? 'completed' : 'pending';
+
     // save
     localStorage.setItem('todo_list', JSON.stringify(todoList));
 
@@ -173,17 +161,32 @@ function handleTodoFormSubmit(event) {
     const liElement = document.querySelector(`ul#todoList > li[data-id="${todoForm.dataset.id}"]`);
     if (liElement) {
       // liElement.textContent = todoInput.value;
+
+      // change alertClass from checkbox
+      const divElement = liElement.querySelector('div.todo');
+      divElement.classList.remove('alert-success', 'alert-success');
+      const newAlertClass = todoCheckbox.checked === true ? 'alert-success' : 'alert-secondary';
+      divElement.classList.add(newAlertClass);
+
+      // change textContent from checkbox
       const titleElement = liElement.querySelector('.todo__title');
       if (titleElement) titleElement.textContent = todoInput.value;
     }
   } else {
-    // add mode
     const todoText = todoInput.value;
+    if (todoText.length === 0) return;
     const newTodo = {
       id: Date.now(),
       title: todoText,
       status: 'pending',
     };
+    // add mode
+    const isCheckbox = todoCheckbox.checked;
+    if (isCheckbox) {
+      newTodo.status = 'completed';
+    } else {
+      newTodo.status = 'pending';
+    }
 
     // save
     const todoList = getTodoList();
@@ -195,10 +198,12 @@ function handleTodoFormSubmit(event) {
     const ulElement = document.getElementById('todoList');
     if (!ulElement) return;
     ulElement.appendChild(newLiElement);
+    /////////////////
   }
 
   // reset form
   delete todoForm.dataset.id;
+  delete todoForm.dataset.status;
   todoForm.reset();
 }
 
@@ -209,10 +214,8 @@ function handleTodoFormSubmit(event) {
   //   { id: 3, title: 'Learn ReactJS', status: 'pending' },
   // ];
 
-  const params = new URLSearchParams(window.location.search);
-
   const todoList = getTodoList();
-  renderTodoList(todoList, 'todoList', params);
+  renderTodoList(todoList, 'todoList');
 
   // register submit event for todo form
   const todoForm = document.getElementById('todoFormId');

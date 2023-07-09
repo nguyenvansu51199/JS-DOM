@@ -1,25 +1,4 @@
-function isMatchStatus(liElement, filterstatus) {
-  return filterstatus === 'all' || liElement.dataset.status === filterstatus;
-}
-
-function isMatchSearch(liElement, searchTerm) {
-  if (!liElement) return false;
-  if (searchTerm === '') return true;
-
-  const titleElement = liElement.querySelector('p.todo__title');
-  if (!titleElement) return false;
-
-  return titleElement.textContent.toLowerCase().includes(searchTerm.toLowerCase());
-}
-
-function isMatch(liElement, params) {
-  return (
-    isMatchSearch(liElement, params.get('searchTerm')) &&
-    isMatchStatus(liElement, params.get('status'))
-  );
-}
-
-function createTodoElement(todo, params) {
+function createTodoElement(todo) {
   if (!todo) return null;
   // find template
   const todoTemplate = document.getElementById('todoTemplate');
@@ -41,9 +20,6 @@ function createTodoElement(todo, params) {
   // update content and needed
   const titleElement = todoElement.querySelector('.todo__title');
   if (titleElement) titleElement.textContent = todo.title;
-
-  // check if we should show it or not
-  todoElement.hidden = !isMatch(todoElement, params);
 
   // TODO: attach event for buttons
   // add click event  for mark-as-done button
@@ -92,14 +68,7 @@ function createTodoElement(todo, params) {
   const editButton = todoElement.querySelector('button.edit');
   if (editButton) {
     editButton.addEventListener('click', () => {
-      // need to get todo from local storage
-      // as todo data can be outdated
-      const todoList = getTodoList();
-      const latestTodo = todoList.find((x) => x.id === todo.id);
-
-      if (!latestTodo) return;
-      // populate data to todo form
-      populateTodoForm(latestTodo);
+      populateTodoForm(todo);
     });
   }
 
@@ -107,21 +76,18 @@ function createTodoElement(todo, params) {
 }
 
 function populateTodoForm(todo) {
-  // query todo form
-  // dataset.id = todo.id
   const todoForm = document.getElementById('todoFormId');
-  if (!todoForm) return;
+  if (todoForm) {
+    todoForm.dataset.id = todo.id;
+  }
 
-  todoForm.dataset.id = todo.id;
-
-  // set values for form controls
-  // set todoText input
   const todoInput = document.getElementById('todoText');
-  if (!todoInput) return;
-  todoInput.value = todo.title;
+  if (todoInput) {
+    todoInput.value = todo.title;
+  }
 }
 
-function renderTodoList(todoList, ulElementId, params) {
+function renderTodoList(todoList, ulElementId) {
   if (!Array.isArray(todoList) || todoList.length === 0) return;
 
   const ulElement = document.getElementById(ulElementId);
@@ -130,7 +96,7 @@ function renderTodoList(todoList, ulElementId, params) {
   // loop through todoList
   // each todo -> create li element -> append to ul
   for (const todo of todoList) {
-    const liElement = createTodoElement(todo, params);
+    const liElement = createTodoElement(todo);
     ulElement.appendChild(liElement);
   }
 }
@@ -145,61 +111,37 @@ function getTodoList() {
 
 function handleTodoFormSubmit(event) {
   event.preventDefault();
-
-  const todoForm = document.getElementById('todoFormId');
-  if (!todoForm) return;
+  console.log('form submit');
 
   // get form values
   // validate form values
   const todoInput = document.getElementById('todoText');
-  if (!todoInput) return;
-
-  // determine add or edit mode
-  const isEdit = Boolean(todoForm.dataset.id);
-
-  if (isEdit) {
-    //find current todo
-    const todoList = getTodoList();
-    const index = todoList.findIndex((x) => x.id.toString() === todoForm.dataset.id);
-    if (index < 0) return;
-
-    // update content
-    todoList[index].title = todoInput.value;
-    // save
-    localStorage.setItem('todo_list', JSON.stringify(todoList));
-
-    // apply DOM changes
-    // find li element having id = todoForm.dataset.id
-    const liElement = document.querySelector(`ul#todoList > li[data-id="${todoForm.dataset.id}"]`);
-    if (liElement) {
-      // liElement.textContent = todoInput.value;
-      const titleElement = liElement.querySelector('.todo__title');
-      if (titleElement) titleElement.textContent = todoInput.value;
-    }
-  } else {
-    // add mode
-    const todoText = todoInput.value;
-    const newTodo = {
-      id: Date.now(),
-      title: todoText,
-      status: 'pending',
-    };
-
-    // save
-    const todoList = getTodoList();
-    todoList.push(newTodo);
-    localStorage.setItem('todo_list', JSON.stringify(todoList));
-
-    // apply DOM changes
-    const newLiElement = createTodoElement(newTodo);
-    const ulElement = document.getElementById('todoList');
-    if (!ulElement) return;
-    ulElement.appendChild(newLiElement);
+  if (!todoInput) {
+    alert('Todo Input Not Found');
+    return;
   }
 
+  const todoText = todoInput.value;
+  const newTodo = {
+    id: Date.now(),
+    title: todoText,
+    status: 'pending',
+  };
+
+  // save
+  const todoList = getTodoList();
+  todoList.push(newTodo);
+  localStorage.setItem('todo_list', JSON.stringify(todoList));
+
+  // apply DOM changes
+  const newLiElement = createTodoElement(newTodo);
+  const ulElement = document.getElementById('todoList');
+  if (!ulElement) return;
+  ulElement.appendChild(newLiElement);
+
   // reset form
-  delete todoForm.dataset.id;
-  todoForm.reset();
+  const todoForm = document.getElementById('todoFormId');
+  if (todoForm) todoForm.reset();
 }
 
 (() => {
@@ -209,10 +151,8 @@ function handleTodoFormSubmit(event) {
   //   { id: 3, title: 'Learn ReactJS', status: 'pending' },
   // ];
 
-  const params = new URLSearchParams(window.location.search);
-
   const todoList = getTodoList();
-  renderTodoList(todoList, 'todoList', params);
+  renderTodoList(todoList, 'todoList');
 
   // register submit event for todo form
   const todoForm = document.getElementById('todoFormId');
